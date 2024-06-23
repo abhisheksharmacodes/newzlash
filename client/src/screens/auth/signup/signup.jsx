@@ -112,9 +112,9 @@ const Signup = (props) => {
         })
     }
 
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => alert(tokenResponse),
-    });
+    // const login = useGoogleLogin({
+    //     onSuccess: tokenResponse => alert(tokenResponse),
+    // });
 
     return <div class="flex"><div id="auth_screen" className="screen">
 

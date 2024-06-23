@@ -1,5 +1,5 @@
 import { React, useRef, useState } from "react"
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
+// import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 import {Link} from 'react-router-dom'
 
 import './login.css'
@@ -56,9 +56,9 @@ const Login = (props) => {
         })
     }
 
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => alert(tokenResponse),
-    });
+    // const login = useGoogleLogin({
+    //     onSuccess: tokenResponse => alert(tokenResponse),
+    // });
 
     return <div className="flex"><div id="auth_screen" className="screen">
         <div id="container" style={{ display: props.classNameContainer }}>
@@ -70,7 +70,7 @@ const Login = (props) => {
                         <input maxLength={20} onChange={validate} type="password" id="pass" ref={pass} placeholder="Password"></input>
                     </div>
                 </form>
-                <button onClick={requestLogin()} disabled={!valid}>Log in</button>
+                <button onClick={requestLogin} disabled={!valid}>Log in</button>
             </div>
             <div className="hr"></div>
             {/* <div className="container_sections flex login_opts">
