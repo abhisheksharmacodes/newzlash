@@ -1,0 +1,52 @@
+ #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: var(--container-background);
+    padding: 30px 25px 30px 25px;
+    border-radius: var(--border-radius);
+}
+
+#auth_screen {
+    background: url('../../../assets/images/bg.svg');
+}
+
+.container_sections {
+    gap:15px;
+}
+
+.signup_opts {
+    flex-direction: row;
+}
+
+.signin_icons {
+    height: 20px;
+    opacity: .9;
+}
+
+.signin_icons:active {
+    opacity: .92;
+}
+
+#pass_status {
+    display: none;
+}
+
+.password_status {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.password_status div {
+    height: 2px;
+    width: 60px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.password_status .green_status {
+    background-color: var(--green);
+}
