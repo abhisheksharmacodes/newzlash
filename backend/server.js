@@ -24,7 +24,9 @@ mongoose.connect('mongodb+srv://root:root@tasks.jrjhcnd.mongodb.net/?retryWrites
 const userRouter = require("./routes/users")
 app.use("/users", userRouter)
 
-
+app.get("/",(req,res)=>{
+  res.json("Working")
+})
 //Listening to the server
 
 
