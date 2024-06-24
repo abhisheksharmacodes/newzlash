@@ -5,7 +5,7 @@ const port = 5000
 const cors = require('cors')
 app.use(cors(
   {
-    origin: ["https://newzlash.vercel.app"],
+    origin: ["https://newzlash.vercel.app/"],
     methods:["POST","GET"],
     credentials:true
   }
