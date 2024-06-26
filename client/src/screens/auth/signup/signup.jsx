@@ -107,7 +107,7 @@ const Signup = (props) => {
             daily: {},
             today: {}
         }
-        axios.post('http://localhost:5000/users/adduser', user_data).then(() => {
+        axios.post('https://newzlash-api.vercel.app/users/adduser', user_data).then(() => {
             alert("Account created")
         })
     }
