@@ -1,0 +1,6 @@
+.screen {
+    justify-content: start;
+    align-items: flex-start;
+    padding:40px;
+    box-sizing: border-box;
+}
