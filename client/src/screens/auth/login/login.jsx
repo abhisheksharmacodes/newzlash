@@ -1,13 +1,16 @@
 import { React, useRef, useState } from "react"
-// import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate  } from "react-router-dom"
 import axios from 'axios'
+import Cookies from 'js-cookie';
 
 import './login.css'
 
 import google from '../../../assets/images/signup/Google.svg'
 
 const Login = (props) => {
+
+    
+    let navigate = useNavigate()
 
     const [valid, setValid] = useState(false)
 
@@ -29,12 +32,22 @@ const Login = (props) => {
             password: pass.current.value
         }
         axios.post('http://localhost:5000/login', user_data).then((data) => {
-            if (data.data)
-                alert("Logged in")
+            if (data.data) {
+                Cookies.set('loggedIn', 'true', { expires: 7 });
+                Cookies.set('email', user_email.current.value, { expires: 7 });
+                Cookies.set('loggedIn', 'true', { expires: 7 });
+                console.log(Cookies.get('email'))
+                navigate('/dashboard')
+            }
+                
+            else if (!data.data)
+                alert("Not logged in")
             else
-                alert("Incorrect")
+                alert("Email not found")
         })
     }
+
+    
 
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => alert(tokenResponse),

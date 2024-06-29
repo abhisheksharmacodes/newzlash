@@ -9,6 +9,7 @@ import Login from './screens/auth/login/login.jsx'
 import Signup from './screens/auth/signup/signup.jsx'
 
 import Niches from './screens/niches/niches.jsx'
+import Dashboard from './screens/dashboard/dashboard.jsx'
 
 import NoPage from './NoPage.jsx'
 
@@ -18,6 +19,7 @@ let App = () => <>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/niches" element={<Niches />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/*" element={<NoPage />} />
       <Route path="/" element={<Home />} />
       </Routes>

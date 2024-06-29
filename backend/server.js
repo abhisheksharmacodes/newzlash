@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const MongoClient  = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient
 
 const app = express()
 const port = 5000
@@ -27,7 +27,7 @@ app.post('/adduser', async (req, res) => {
     const data = req.body
     try {
         const result = await collection.insertOne(data)
-        res.json({message: result})
+        res.json({ message: result })
         console.log("Inserted")
     } catch (e) {
         console.log(e)
@@ -35,24 +35,36 @@ app.post('/adduser', async (req, res) => {
     }
 })
 
-app.post('/login', async (req,res) => {
-    const data = req.body
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body
+
     try {
-        const query = { email: data.email }
+        const query = { email: email }
         const cursor = collection.find(query)
         const results = await cursor.toArray()
 
-        if (data.password === results[0].password)
+        if (password === results[0].password) {
             res.send(true)
-        else    
+        }
+        else
             res.send(false)
 
-        
+
     } catch (err) {
         console.error(err)
         res.status(500)
     }
 })
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => { // Destroy the session
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Error logging out' });
+        }
+        res.json({ message: 'Logged out successfully' });
+    });
+});
 
 app.listen(port, () => {
     console.log('Listening at port ' + port)

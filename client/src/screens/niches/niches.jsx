@@ -1,5 +1,5 @@
 import { React, useRef, useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate  } from "react-router-dom"
 
 import axios from 'axios'
 
@@ -11,6 +11,9 @@ const Cards = (props) => <div className="cards">
 </div>
 
 const Niches = (props) => {
+
+    
+    let navigate = useNavigate()
 
     const email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -48,6 +51,10 @@ const Niches = (props) => {
 
         setSelectedNiches(newSelectedNiches)
 
+    }
+
+    const selectNiches = () => {
+        navigate('/dashboard')
     }
 
     return <div id="auth_screen" className="screen normal_screen">
@@ -88,7 +95,7 @@ const Niches = (props) => {
             <div className={`niches ${selectedNiches.includes('Science') ? 'niches_selected' : ''}`}
                 onClick={() => handleClick('Science')}>Science</div>
         </div>
-        <button style={{width:'150px'}}>Next</button>
+        <button onClick={selectNiches} style={{width:'150px'}}>Next</button>
     </div>
 }
 

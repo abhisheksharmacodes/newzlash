@@ -1,9 +1,9 @@
 import React from "react";
+import Cookies from 'js-cookie';
 
-import Signup from "./screens/auth/signup/signup"
-import Niches from "./screens/niches/niches";
 import Login from "./screens/auth/login/login";
+import Dashboard from "./screens/dashboard/dashboard";
 
-const Home = () => <Login />
+const Home = () => Cookies.get('loggedIn') === 'true' ? <Dashboard /> : <Login />
 
 export default Home;
