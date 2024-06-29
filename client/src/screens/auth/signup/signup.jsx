@@ -1,5 +1,5 @@
 import { React, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate  } from "react-router-dom"
 
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
@@ -10,6 +10,8 @@ import './signup.css'
 import google from '../../../assets/images/signup/Google.svg'
 
 const Signup = (props) => {
+
+    let navigate = useNavigate()
 
     const email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -108,7 +110,9 @@ const Signup = (props) => {
             today: {}
         }
         axios.post('https://newzlash-api.vercel.app/users/adduser', user_data).then(() => {
-            alert("Account created")
+            navigate("/niches")
+        }).catch((e)=> {
+            alert(e)
         })
     }
 

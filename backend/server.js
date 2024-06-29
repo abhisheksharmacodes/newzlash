@@ -1,8 +1,18 @@
 const express = require("express");
+const session = require('express-session')
+const MongoClient = require('mongodb').MongoClient
+const store = new session.MemoryStore()
 const app = express()
 const port = 5000
 
-const { MongoClient } = require('mongodb');
+const userRouter = require("./routes/users")
+
+app.use(session({
+    secret: 'some secret',
+    cookie: { maxAge: 30000 },
+    saveUninitialized: false,
+    store
+}))
 
 const cors = require('cors')
 app.use(cors())
@@ -17,11 +27,33 @@ mongoose.connect('mongodb+srv://root:root@tasks.jrjhcnd.mongodb.net/?retryWrites
         })
     }).catch(err => console.log(err))
 
-const userRouter = require("./routes/users")
+
 app.use("/users", userRouter)
 
+app.post('/login', (req, res) => {
+    res.json('asdf')
+    console.log(req.sessionID);
+    const { username, password } = req.body
+    if (req.session.authenticated) {
+        res.json(req.session)
+    } else {
+        if (password == '123') {
+            req.session.authenticated = true
+            req.session.user = {
+                username, password
+            }
+            res.json(req.session)
+        } else {
+            console.log(req.body)
+            res.status(403).json({ msg: 'Bad Credentials' })
+        }
+    }
+
+    res.send(200)
+})
+
 app.get("/",(req,res)=>{
-  res.json("Working")
+  console.log("Working")
 })
 //Listening to the server
 
