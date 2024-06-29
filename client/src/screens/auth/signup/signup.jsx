@@ -104,12 +104,10 @@ const Signup = (props) => {
             lname: lname.current.value,
             email: user_email.current.value,
             password: pass.current.value,
-            action_plan: [],
-            task_channels: [],
-            daily: {},
-            today: {}
+            niches: []
         }
-        axios.post('https://newzlash-api.vercel.app/users/adduser', user_data).then(() => {
+        axios.post('http://localhost:5000/adduser', user_data).then(() => {
+            alert("Inserted")
             navigate("/niches")
         }).catch((e)=> {
             alert(e)

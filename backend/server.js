@@ -1,60 +1,59 @@
-const express = require("express");
-const session = require('express-session')
-const MongoClient = require('mongodb').MongoClient
-const store = new session.MemoryStore()
+const express = require('express')
+const cors = require('cors')
+const MongoClient  = require('mongodb').MongoClient
+
 const app = express()
 const port = 5000
+var client, db, collection
 
-const userRouter = require("./routes/users")
-
-app.use(session({
-    secret: 'some secret',
-    cookie: { maxAge: 30000 },
-    saveUninitialized: false,
-    store
-}))
-
-const cors = require('cors')
+app.use(express.json())
 app.use(cors())
 
-//Connecting the database
-const mongoose = require("mongoose");
-mongoose.connect('mongodb+srv://root:root@tasks.jrjhcnd.mongodb.net/?retryWrites=true&w=majority&appName=tasks')
-    .then(() => {
-        console.log("DB connected")
-        app.listen(5000, () => {
-            console.log("Server is listening on port" + port)
-        })
-    }).catch(err => console.log(err))
-
-
-app.use("/users", userRouter)
-
-app.post('/login', (req, res) => {
-    res.json('asdf')
-    console.log(req.sessionID);
-    const { username, password } = req.body
-    if (req.session.authenticated) {
-        res.json(req.session)
-    } else {
-        if (password == '123') {
-            req.session.authenticated = true
-            req.session.user = {
-                username, password
-            }
-            res.json(req.session)
-        } else {
-            console.log(req.body)
-            res.status(403).json({ msg: 'Bad Credentials' })
-        }
+async function connect() {
+    try {
+        client = await MongoClient.connect('mongodb+srv://root:root@tasks.jrjhcnd.mongodb.net/?retryWrites=true&w=majority&appName=tasks')
+        console.log("Connected")
+        db = client.db("users")
+        collection = db.collection("users")
+    } catch (e) {
+        console.log(e)
     }
+}
 
-    res.send(200)
+connect()
+
+
+app.post('/adduser', async (req, res) => {
+    const data = req.body
+    try {
+        const result = await collection.insertOne(data)
+        res.json({message: result})
+        console.log("Inserted")
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ message: 'Error' })
+    }
 })
 
-app.get("/",(req,res)=>{
-  console.log("Working")
+app.post('/login', async (req,res) => {
+    const data = req.body
+    try {
+        const query = { email: data.email }
+        const cursor = collection.find(query)
+        const results = await cursor.toArray()
+
+        if (data.password === results[0].password)
+            res.send(true)
+        else    
+            res.send(false)
+
+        
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+    }
 })
-//Listening to the server
 
-
+app.listen(port, () => {
+    console.log('Listening at port ' + port)
+})

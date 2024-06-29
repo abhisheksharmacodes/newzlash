@@ -1,6 +1,6 @@
 import { React, useRef, useState } from "react"
 // import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import './login.css'
@@ -25,11 +25,14 @@ const Login = (props) => {
 
     let requestLogin = () => {
         let user_data = {
-            username: user_email.current.value,
+            email: user_email.current.value,
             password: pass.current.value
         }
-        axios.put('http://localhost:5000/login', user_data).then(() => {
-            alert("Successful")
+        axios.post('http://localhost:5000/login', user_data).then((data) => {
+            if (data.data)
+                alert("Logged in")
+            else
+                alert("Incorrect")
         })
     }
 
@@ -60,7 +63,7 @@ const Login = (props) => {
                 <Link to="/signup" className="link_text">Don't have an account? Create one.</Link>
             </div>
         </div>
-        </div>
+    </div>
     </div>
 }
 
