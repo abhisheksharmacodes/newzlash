@@ -1,7 +1,7 @@
 import { React, useRef, useState, useEffect } from "react"
 import { Link, useNavigate  } from "react-router-dom"
-
 import axios from 'axios'
+import Cookies from 'js-cookie';
 
 import '../../App.css'
 import './niches.css'
@@ -12,27 +12,9 @@ const Cards = (props) => <div className="cards">
 
 const Niches = (props) => {
 
-    
     let navigate = useNavigate()
 
-    const email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-    const [valid, setValid] = useState(false)
     const [selectedNiches, setSelectedNiches] = useState([])
-
-    const fname = useRef(null)
-    const lname = useRef(null)
-    const pass = useRef(null)
-    const repass = useRef(null)
-    const user_email = useRef(null)
-    const checkPass = useRef(null)
-    const passMessage = useRef(null)
-
-    const veryWeak_ = useRef(null)
-    const Weak_ = useRef(null)
-    const Moderate_ = useRef(null)
-
-
 
     useEffect(() => {
         console.log(selectedNiches)
@@ -54,6 +36,9 @@ const Niches = (props) => {
     }
 
     const selectNiches = () => {
+        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches).then(()=>{
+            
+        })
         navigate('/dashboard')
     }
 

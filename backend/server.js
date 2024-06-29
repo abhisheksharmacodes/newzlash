@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const MongoClient = require('mongodb').MongoClient
+const { MongoClient, ObjectId } = require('mongodb')
 
 const app = express()
 const port = 5000
@@ -27,12 +27,30 @@ app.post('/adduser', async (req, res) => {
     const data = req.body
     try {
         const result = await collection.insertOne(data)
-        res.json({ message: result })
+        res.send(result.insertedId.toString())
         console.log("Inserted")
     } catch (e) {
         console.log(e)
         res.status(500).json({ message: 'Error' })
     }
+})
+
+app.put('/niches/:id', async (req, res) => {
+    const id = req.params.id
+    const data = req.body
+
+    try {
+        const updateResult = await collection.updateOne({ _id: new ObjectId(id) }, { $set: { niches: data } })
+        if (updateResult.modifiedCount === 1) {
+            console.log("Data updated successfully!");
+        } else {
+            console.log("Document not found");
+        }
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+    }
+
 })
 
 app.post('/login', async (req, res) => {
@@ -44,12 +62,10 @@ app.post('/login', async (req, res) => {
         const results = await cursor.toArray()
 
         if (password === results[0].password) {
-            res.send(true)
+            res.send(results[0]._id.toString())
         }
         else
             res.send(false)
-
-
     } catch (err) {
         console.error(err)
         res.status(500)
@@ -65,6 +81,20 @@ app.get('/logout', (req, res) => {
         res.json({ message: 'Logged out successfully' });
     });
 });
+
+app.get('/user/:id', async (req, res) => {
+    var id = req.params.id
+    try {
+        const query = { _id: new ObjectId(id) }
+        const cursor = collection.find(query)
+        const results = await cursor.toArray()
+
+        res.send(results[0].niches)
+
+    } catch (e) {
+        console.log(e)
+    }
+})
 
 app.listen(port, () => {
     console.log('Listening at port ' + port)

@@ -1,5 +1,5 @@
 import { React, useRef, useState } from "react"
-import { Link, useNavigate  } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Cookies from 'js-cookie';
 
@@ -9,7 +9,7 @@ import google from '../../../assets/images/signup/Google.svg'
 
 const Login = (props) => {
 
-    
+
     let navigate = useNavigate()
 
     const [valid, setValid] = useState(false)
@@ -33,13 +33,12 @@ const Login = (props) => {
         }
         axios.post('http://localhost:5000/login', user_data).then((data) => {
             if (data.data) {
+                Cookies.set('id', data.data, { expires: 7 })
                 Cookies.set('loggedIn', 'true', { expires: 7 });
                 Cookies.set('email', user_email.current.value, { expires: 7 });
-                Cookies.set('loggedIn', 'true', { expires: 7 });
-                console.log(Cookies.get('email'))
                 navigate('/dashboard')
             }
-                
+
             else if (!data.data)
                 alert("Not logged in")
             else
@@ -47,7 +46,7 @@ const Login = (props) => {
         })
     }
 
-    
+
 
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => alert(tokenResponse),

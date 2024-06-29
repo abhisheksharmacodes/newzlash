@@ -1,8 +1,9 @@
 import { React, useRef, useState } from "react"
-import { Link, useNavigate  } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
+import Cookies from 'js-cookie';
 
 import '../../../App.css'
 import './signup.css'
@@ -106,10 +107,12 @@ const Signup = (props) => {
             password: pass.current.value,
             niches: []
         }
-        axios.post('http://localhost:5000/adduser', user_data).then(() => {
-            alert("Inserted")
+        axios.post('http://localhost:5000/adduser', user_data).then((data) => {
+            Cookies.set('id', data.data, { expires: 7 })
+            Cookies.set('loggedIn', 'true', { expires: 7 });
+            Cookies.set('email', user_email.current.value, { expires: 7 });
             navigate("/niches")
-        }).catch((e)=> {
+        }).catch((e) => {
             alert(e)
         })
     }
@@ -154,7 +157,7 @@ const Signup = (props) => {
                 </div>
             </div> */}
             <div className="container_sections flex">
-            <Link to="/login" className="link_text">Already have an account? Log in.</Link>
+                <Link to="/login" className="link_text">Already have an account? Log in.</Link>
             </div>
         </div> </div></div>
 }
