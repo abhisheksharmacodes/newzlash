@@ -43,4 +43,10 @@
 
 #article h1 {
     width: 700px;
+    font-size: 1.6rem;
+}
+
+#article p {
+    width: 700px;
+    font-size: 1.3rem;
 }

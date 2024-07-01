@@ -52,7 +52,7 @@ const Dashboard = () => {
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
 
-    let NewsCard = (props) => <div className="newsCard">
+    let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
         <img src={props.image}/>
         <span>{props.title}</span>
         <p>{props.desc}</p>
@@ -69,6 +69,10 @@ const Dashboard = () => {
         navigate("/login")
     }
 
+    let openArticle = () => {
+        Cookies.set('newsArticle',a.id);console.log(a.id);navigate('/article')
+    }
+
     return <div id="auth_screen" className="screen normal_screen">
         <div id="container1">
             <div id="header">
@@ -77,10 +81,9 @@ const Dashboard = () => {
                 <img onClick={requestLogOut} src={logout} />
             </div>
             <div id="news">
-                {niches.length > 0 && news.map((a) => <NewsCard onClick={()=>{Cookies.set('newsArticle',a.id)}} image={a.image} title={a.title} desc={a.summary} />)}
+                {niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);console.log(a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)}
             </div>
         </div>
-
     </div>
 }
 
