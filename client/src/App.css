@@ -35,8 +35,14 @@ html {
 }
 
 body {
-  min-width: 100%;
-  min-height: 100%;
+  width: 100vw;
+  height: 100vw;
+  overflow-x: hidden;
+  background-image: url('assets/images/bg.png');
+  background-repeat: repeat;
+  background-size:cover;
+  background-position: center;
+  background-origin: content-box;
 }
 
 input {
@@ -64,7 +70,7 @@ input:focus {
 button {
   color: #2A3356;
   width: 70%;
-  height: 45px;
+  height: auto;
   text-align: center;
   border-radius: 50px;
   border: none;
@@ -73,6 +79,7 @@ button {
   cursor: pointer;
   opacity: var(--opacity-normal-active);
   background-color: rgb(255, 255, 255);
+  padding: 10px;
 }
 
 button:hover {
@@ -113,11 +120,10 @@ button:active {
 .screen {
   height: 100vh;
   width: 100vw;
-  background-repeat: round;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: none;
 }
 
 .flex {

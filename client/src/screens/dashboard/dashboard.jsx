@@ -55,7 +55,7 @@ const Dashboard = () => {
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
         <img src={props.image}/>
         <span>{props.title}</span>
-        <p>{props.desc}</p>
+        {/* <p>{props.desc}</p> */}
     </div>
 
     useEffect(() => {

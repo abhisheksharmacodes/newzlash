@@ -80,7 +80,7 @@ const Niches = (props) => {
             <div className={`niches ${selectedNiches.includes('Science') ? 'niches_selected' : ''}`}
                 onClick={() => handleClick('Science')}>Science</div>
         </div>
-        <button onClick={selectNiches} style={{width:'150px'}}>Next</button>
+        <button onClick={selectNiches}>Next</button>
     </div>
 }
 
