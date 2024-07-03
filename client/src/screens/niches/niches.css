@@ -1,12 +1,15 @@
 .normal_screen {
     justify-content: start;
     align-items: flex-start;
-    padding:30px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap:40px;
     width: 100%;
+}
+
+.niches {    
+    padding:30px;
 }
 
 #niches_container {

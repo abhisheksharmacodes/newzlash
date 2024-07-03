@@ -51,7 +51,7 @@ const Article = () => {
         navigate('/dashboard')
     }
 
-    return <div id="auth_screen" className="screen normal_screen">
+    return <div id="auth_screen" className="">
         <div id="container1">
             <div id="header">
                 <img onClick={goback} src={back} />
