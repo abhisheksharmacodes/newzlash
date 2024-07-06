@@ -35,6 +35,19 @@ app.post('/adduser', async (req, res) => {
     }
 })
 
+app.get('/niches/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const query = { _id: new ObjectId(id) }
+        const cursor = collection.find(query)
+        const results = await cursor.toArray()
+
+        res.send(results[0].niches)
+    } catch (e) {
+        res.send(e)
+    }
+})
+
 app.put('/niches/:id', async (req, res) => {
     const id = req.params.id
     const data = req.body

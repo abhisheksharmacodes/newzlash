@@ -51,6 +51,13 @@ const Article = () => {
         navigate('/dashboard')
     }
 
+    let redirect = () => {
+        window.location.href = "www.google.come"
+        // window.open(article.url)
+    }
+
+    const ExpiredMesaage = <p>Your session has expired. Please login again via <a href="https://www.google.com/" target="_blank"> Google</a>.</p>
+
     return <div id="auth_screen" className="">
         <div id="container1">
             <div id="header">
@@ -62,6 +69,7 @@ const Article = () => {
                 <img src={article.image} alt="" />
                 <h1>{article.title}</h1>
                 <p>{article.text}</p>
+                <p>by <span id="able">{article.author}</span></p>
             </div>
         </div>
 

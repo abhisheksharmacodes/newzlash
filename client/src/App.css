@@ -26,8 +26,13 @@
   padding: 0;
 }
 
-::selection {
+*::selection {
   user-select: none;
+}
+
+input::selection, #able::selection {
+  user-select:text;
+  background-color: rgba(255, 255, 255,.15);
 }
 
 body {

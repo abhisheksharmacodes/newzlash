@@ -1,10 +1,12 @@
 import { React, useRef, useState, useEffect } from "react"
-import { Link, useNavigate  } from "react-router-dom"
+import { Link, useFetcher, useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Cookies from 'js-cookie';
 
 import '../../App.css'
 import './niches.css'
+
+
 
 const Cards = (props) => <div className="cards">
 
@@ -12,9 +14,24 @@ const Cards = (props) => <div className="cards">
 
 const Niches = (props) => {
 
+
+
+
     let navigate = useNavigate()
 
     const [selectedNiches, setSelectedNiches] = useState([])
+
+    let checkNiches = () => {
+        axios.get('http://localhost:5000/niches/' + Cookies.get('id')).then((data) => {
+            console.log(data.data)
+            if (data.data.length != 0) {
+                setSelectedNiches(data.data)
+            }
+        })
+    }
+    useEffect(() => {
+        checkNiches()
+    }, [])
 
     useEffect(() => {
         console.log(selectedNiches)
@@ -33,16 +50,17 @@ const Niches = (props) => {
 
         setSelectedNiches(newSelectedNiches)
 
+
     }
 
     const selectNiches = () => {
-        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches).then(()=>{
-            
+        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches).then((data) => {
+
         })
         navigate('/dashboard')
     }
 
-    return <div id="auth_screen" className="screen normal_screen niches">
+    return <div id="auth_screen" className="screen normal_screen" style={{ padding: '50px' }}>
         <h1>Select niches</h1>
         <div id="niches_container">
             <div className={`niches ${selectedNiches.includes('Technology') ? 'niches_selected' : ''}`}
@@ -80,7 +98,7 @@ const Niches = (props) => {
             <div className={`niches ${selectedNiches.includes('Science') ? 'niches_selected' : ''}`}
                 onClick={() => handleClick('Science')}>Science</div>
         </div>
-        <button onClick={selectNiches}>Next</button>
+        <button style={{ width: '140px' }} onClick={selectNiches}>Next</button>
     </div>
 }
 

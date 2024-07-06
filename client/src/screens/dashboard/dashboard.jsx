@@ -30,11 +30,15 @@ const Dashboard = () => {
     let clean = (a) => a.replaceAll("<(.|\n)*?>" , "").replaceAll("&nbsp;" , " ").replaceAll("&amp;" , "&")
 
     function getDataAndFetchNews() {
+
+        let selectedNiches = selectTwoNiches(niches)
+
         axios.get('http://localhost:5000/user/' + Cookies.get('id')).then((data) => {
             setNiches(data.data)
+            console.log('API DATA' + data.data)
         })
 
-        const url = `https://api.worldnewsapi.com/search-news?text=${selectTwoNiches(niches)}&language=en`;
+        const url = `https://api.worldnewsapi.com/search-news?text=${selectedNiches}&language=en`;
         const apiKey = 'b7b5392106804c3e96895c7f650a8694';
 
         fetch(url, {
@@ -48,9 +52,13 @@ const Dashboard = () => {
             }
             return response.json();
         })
-            .then(data => {setNews(data.news);console.log(data.news)})
+            .then(data => {setNews(data.news);console.log(data.news);console.log(selectedNiches)})
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
+
+    window.onbeforeunload = function (event) {
+        getDataAndFetchNews()
+    };
 
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
         <img src={props.image}/>
@@ -76,7 +84,7 @@ const Dashboard = () => {
     return <div id="auth_screen" className="screen normal_screen">
         <div id="container1">
             <div id="header">
-                <img onClick={getDataAndFetchNews} src={refresh} />
+                <img onClick={()=>navigate('/niches')} src={refresh} />
                 <h1>Newzlash</h1>
                 <img onClick={requestLogOut} src={logout} />
             </div>
