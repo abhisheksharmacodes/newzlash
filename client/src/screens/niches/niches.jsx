@@ -1,25 +1,18 @@
-import { React, useRef, useState, useEffect } from "react"
-import { Link, useFetcher, useNavigate } from "react-router-dom"
+import { React, useState, useEffect } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Cookies from 'js-cookie';
 
 import '../../App.css'
 import './niches.css'
 
+const Niches = () => {
 
-
-const Cards = (props) => <div className="cards">
-
-</div>
-
-const Niches = (props) => {
-
-
-
+    let storedNiches = localStorage.getItem('niches') ? localStorage.getItem('niches').split(",") : []
 
     let navigate = useNavigate()
-
-    const [selectedNiches, setSelectedNiches] = useState([])
+    const [selectedNiches, setSelectedNiches] = useState(storedNiches)
+    const[title,setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
 
     let checkNiches = () => {
         axios.get('http://localhost:5000/niches/' + Cookies.get('id')).then((data) => {
@@ -29,6 +22,7 @@ const Niches = (props) => {
             }
         })
     }
+
     useEffect(() => {
         checkNiches()
     }, [])
@@ -54,14 +48,14 @@ const Niches = (props) => {
     }
 
     const selectNiches = () => {
-        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches).then((data) => {
-
-        })
+        
+        localStorage.setItem('niches',selectedNiches)
+        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches)
         navigate('/dashboard')
     }
 
     return <div id="auth_screen" className="screen normal_screen" style={{ padding: '50px' }}>
-        <h1>Select niches</h1>
+        <h1>{title}</h1>
         <div id="niches_container">
             <div className={`niches ${selectedNiches.includes('Technology') ? 'niches_selected' : ''}`}
                 onClick={() => handleClick('Technology')}>Technology</div>

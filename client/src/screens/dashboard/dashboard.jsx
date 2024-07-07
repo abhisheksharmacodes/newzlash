@@ -12,8 +12,10 @@ import './dashboard.css'
 
 const Dashboard = () => {
 
+    let storedNiches = localStorage.getItem('niches') ? localStorage.getItem('niches').split(",") : []
+
     let navigate = useNavigate()
-    const [niches, setNiches] = useState([])
+    const [niches, setNiches] = useState(storedNiches)
     const [news, setNews] = useState([])
 
     let selectTwoNiches = (niches) => {
@@ -22,23 +24,17 @@ const Dashboard = () => {
         niches.splice(first,1)
     
         let second = (first + 1) % niches.length;
-        
-        console.log(niches)
         return first_n + '+' + niches[second]
     }   
 
-    let clean = (a) => a.replaceAll("<(.|\n)*?>" , "").replaceAll("&nbsp;" , " ").replaceAll("&amp;" , "&")
-
     function getDataAndFetchNews() {
-
-        let selectedNiches = selectTwoNiches(niches)
 
         axios.get('http://localhost:5000/user/' + Cookies.get('id')).then((data) => {
             setNiches(data.data)
-            console.log('API DATA' + data.data)
+            localStorage.setItem('niches',data.data)
         })
 
-        const url = `https://api.worldnewsapi.com/search-news?text=${selectedNiches}&language=en`;
+        const url = `https://api.worldnewsapi.com/search-news?text=${selectTwoNiches(niches)}&language=en`;
         const apiKey = 'b7b5392106804c3e96895c7f650a8694';
 
         fetch(url, {
@@ -52,13 +48,9 @@ const Dashboard = () => {
             }
             return response.json();
         })
-            .then(data => {setNews(data.news);console.log(data.news);console.log(selectedNiches)})
+            .then(data => {setNews(data.news)})
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
-
-    window.onbeforeunload = function (event) {
-        getDataAndFetchNews()
-    };
 
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
         <img src={props.image}/>
@@ -77,19 +69,19 @@ const Dashboard = () => {
         navigate("/login")
     }
 
-    let openArticle = () => {
-        Cookies.set('newsArticle',a.id);console.log(a.id);navigate('/article')
+    let goToNiches = () => {
+        navigate('/niches')
     }
 
     return <div id="auth_screen" className="screen normal_screen">
         <div id="container1">
             <div id="header">
-                <img onClick={()=>navigate('/niches')} src={refresh} />
+                <img onClick={goToNiches} src={refresh} />
                 <h1>Newzlash</h1>
                 <img onClick={requestLogOut} src={logout} />
             </div>
             <div id="news">
-                {niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);console.log(a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)}
+                {niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)}
             </div>
         </div>
     </div>

@@ -101,9 +101,7 @@ app.get('/user/:id', async (req, res) => {
         const query = { _id: new ObjectId(id) }
         const cursor = collection.find(query)
         const results = await cursor.toArray()
-
         res.send(results[0].niches)
-
     } catch (e) {
         console.log(e)
     }
