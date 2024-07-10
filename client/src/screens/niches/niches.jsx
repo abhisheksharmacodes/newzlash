@@ -12,7 +12,16 @@ const Niches = () => {
 
     let navigate = useNavigate()
     const [selectedNiches, setSelectedNiches] = useState(storedNiches)
-    const[title,setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
+    const [title,setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
+
+    let checkStatus = () => {
+        if (!Cookies.get('id'))
+            navigate('/login')
+    }
+
+    useEffect(() => {
+        checkStatus()
+    }, [])
 
     let checkNiches = () => {
         axios.get('http://localhost:5000/niches/' + Cookies.get('id')).then((data) => {
@@ -41,10 +50,7 @@ const Niches = () => {
         } else { // Niche not selected, add it
             newSelectedNiches.push(niche);
         }
-
         setSelectedNiches(newSelectedNiches)
-
-
     }
 
     const selectNiches = () => {

@@ -1,16 +1,15 @@
 import { React, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
+
+import logo from '../../../assets/images/logo.png'
 
 import '../../../App.css'
 import './signup.css'
 
-import google from '../../../assets/images/signup/Google.svg'
-
-const Signup = (props) => {
+const Signup = () => {
 
     let navigate = useNavigate()
 
@@ -19,7 +18,6 @@ const Signup = (props) => {
     const [valid, setValid] = useState(false)
 
     const fname = useRef(null)
-    const lname = useRef(null)
     const pass = useRef(null)
     const repass = useRef(null)
     const user_email = useRef(null)
@@ -83,7 +81,7 @@ const Signup = (props) => {
     }
 
     let validate = () => {
-        if (fname.current.value !== '' && lname.current.value !== '' && user_email.current.value !== '' && pass.current.value !== '') {
+        if (fname.current.value !== '' && user_email.current.value !== '' && pass.current.value !== '') {
             if (pass.current.value === repass.current.value) {
                 repass.current.classList = ''
                 setValid(true)
@@ -102,7 +100,6 @@ const Signup = (props) => {
     let addUser = async () => {
         let user_data = {
             fname: fname.current.value,
-            lname: lname.current.value,
             email: user_email.current.value,
             password: pass.current.value,
             niches: []
@@ -117,19 +114,13 @@ const Signup = (props) => {
         })
     }
 
-    // const login = useGoogleLogin({
-    //     onSuccess: tokenResponse => alert(tokenResponse),
-    // });
-
     return <div class="flex"><div id="auth_screen" className="screen">
-
-        <div id="container" style={{ display: props.classNameContainer }}>
+        <div id="container">
             <span className="title">Sign up</span>
             <div className="flex container_sections">
                 <form>
                     <div id="" className="flex">
-                        <input ref={fname} maxLength={20} placeholder="First name"></input>
-                        <input ref={lname} maxLength={20} placeholder="Last name"></input>
+                        <input ref={fname} maxLength={20} placeholder="Name"></input>
                         <div className="normal_flex">
                             <input type="email" ref={user_email} onChange={emailValidate} placeholder="Email"></input>
                         </div>
@@ -150,12 +141,6 @@ const Signup = (props) => {
                 <button disabled={!valid} onClick={addUser}>Sign up</button>
             </div>
             <div className="hr"></div>
-            {/* <div className="container_sections flex signup_opts">
-                <div className="icon_button" onClick={login}>
-                    <img className="signin_icons" src={google}></img>
-                    Sign up using Google
-                </div>
-            </div> */}
             <div className="container_sections flex">
                 <Link to="/login" className="link_text">Already have an account? Log in.</Link>
             </div>

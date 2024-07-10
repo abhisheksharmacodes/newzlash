@@ -14,6 +14,13 @@ const Article = () => {
 
     const [article, setArticle] = useState({})
 
+    let checkStatus = () => {
+        if (Cookies.get('loggedIn') == 'false')
+            navigate('/login')
+    }
+
+    useEffect(()=>checkStatus(),[])
+
     let clean = (a) => a.replaceAll("<(.|\n)*?>", "").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&")
 
     function getDataAndFetchNews() {

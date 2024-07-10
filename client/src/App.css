@@ -2,7 +2,7 @@
 
 :root {
 
-  --normal_text: 11pt;
+  --normal_text: 11.5pt;
 
   --trans: 0.4s;
   --border-radius: 20px;
@@ -36,20 +36,16 @@ input::selection, #able::selection {
 }
 
 body {
-  width: 100vw;
-  height: 100vw;
-  overflow-x: hidden;
   background-image: url('assets/images/bg.png');
-  background-repeat: repeat;
-  background-size:cover;
-  background-position: center;
-  background-origin: content-box;
+  background-repeat:no-repeat;
+  background-size: 100% 500%;
+  overflow-x: hidden;
 }
 
 input {
   background-color: rgba(217, 217, 217, .1);
   border: none;
-  font-size: 15px;
+  font-size: 17px;
   padding: 10px;
   border-radius: 10px;
   color: rgba(217, 217, 217, 1);
@@ -75,7 +71,7 @@ button {
   text-align: center;
   border-radius: 50px;
   border: none;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
   opacity: var(--opacity-normal-active);
@@ -91,14 +87,37 @@ button:active {
   opacity: var(--opacity-normal-active);
 }
 
+footer {
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  gap:30px;
+}
+
+footer span {
+  opacity: .7;
+  cursor: pointer;
+  transition: .4s;
+}
+
+footer span:hover {
+  opacity: 1;
+}
+
+.secondary_button {
+  background-color: rgba(255, 255, 255,.07);
+  color: white;
+  font-weight: normal;
+}
+
 .error {
   background-color: rgba(253, 36, 36, 0.1);
 }
 
 .info_text,
-.error_text,
+.error_text,.link_text,
 .success_text {
-  font-size: 15px;
+  font-size: 17px;
   margin-left: 10px;
 }
 
@@ -133,6 +152,10 @@ button:active {
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.logo {
+  height: 100px;
 }
 
 .normal_flex {

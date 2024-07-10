@@ -11,6 +11,8 @@ import Signup from './screens/auth/signup/signup.jsx'
 import Niches from './screens/niches/niches.jsx'
 import Dashboard from './screens/dashboard/dashboard.jsx'
 import Article from './screens/article/article.jsx'
+import User from './screens/user/user.jsx'
+import About from './screens/about/about.jsx'
 
 import NoPage from './NoPage.jsx'
 
@@ -21,7 +23,9 @@ let App = () => <>
       <Route path="/signup" element={<Signup />} />
       <Route path="/niches" element={<Niches />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/article" element={<Article />} />
+      <Route path="/article" element={<Article />} />      
+      <Route path="/user" element={<User />} />
+      <Route path="/about" element={<About />} />
       <Route path="/*" element={<NoPage />} />
       <Route path="/" element={<Home />} />
       </Routes>

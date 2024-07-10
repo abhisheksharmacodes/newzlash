@@ -1,22 +1,9 @@
-.normal_screen {
-    align-items: center;
-    align-items: flex-start;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-}
 
-#container1 {
-    width: 100%;
-}
 
 #header {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%;
     margin-bottom: 30px;
     box-shadow: 0 0 12px 12px rgba(0,0,0,.22);
     padding: 20px;
@@ -25,6 +12,14 @@
     left:0;
     z-index: 2;
     background:linear-gradient(90deg, #272A53, #23335C);
+}
+
+#header h1 {
+    cursor: pointer;
+}
+
+#header h1:hover {
+    opacity: 1;
 }
 
 #header img {
@@ -42,7 +37,7 @@
     gap: 20px;
     position: relative;
     z-index: -1;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 .newsCard {
@@ -66,3 +61,4 @@
     font-weight: bold;
     font-size: 20px;
 }
+

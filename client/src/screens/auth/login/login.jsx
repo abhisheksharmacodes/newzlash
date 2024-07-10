@@ -1,13 +1,14 @@
 import { React, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import axios from 'axios'
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
 import './login.css'
 
-import google from '../../../assets/images/signup/Google.svg'
+import logo from '../../../assets/images/logo.png'
 
-const Login = (props) => {
+
+const Login = () => {
 
 
     let navigate = useNavigate()
@@ -52,8 +53,8 @@ const Login = (props) => {
     //     onSuccess: tokenResponse => alert(tokenResponse),
     // });
 
-    return <div className="flex"><div id="auth_screen" className="screen">
-        <div id="container" style={{ display: props.classNameContainer }}>
+    return <div className="flex"><div id="auth_screen" className="screen" style={{ flexDirection: 'column' }}>
+        <div id="container">
             <span className="title">Log in</span>
             <div className="flex container_sections">
                 <form>
@@ -65,12 +66,6 @@ const Login = (props) => {
                 <button onClick={requestLogin} disabled={!valid}>Log in</button>
             </div>
             <div className="hr"></div>
-            {/* <div className="container_sections flex login_opts">
-                <div className="icon_button" onClick={login}>
-                    <img className="signin_icons" src={google}></img>
-                    Log in using Google
-                </div>
-            </div> */}
             <div className="container_sections flex">
                 <Link to="/signup" className="link_text">Don't have an account? Create one.</Link>
             </div>

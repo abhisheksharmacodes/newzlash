@@ -18,6 +18,15 @@ const Dashboard = () => {
     const [niches, setNiches] = useState(storedNiches)
     const [news, setNews] = useState([])
 
+    let checkStatus = () => {
+        if (!Cookies.get('id'))
+            navigate('/login')
+    }
+
+    useEffect(() => {
+        checkStatus()
+    }, [])
+
     let selectTwoNiches = (niches) => {
         let first = Math.floor(Math.random() * (niches.length - 0 + 1)) + 0
         let first_n = niches[first]
@@ -62,23 +71,20 @@ const Dashboard = () => {
         getDataAndFetchNews();
     }, []);
 
-
-    let requestLogOut = () => {
-        Cookies.set('loggedIn', 'false', { expires: 7 });
-        Cookies.set('email', '', { expires: 7 });
-        navigate("/login")
-    }
-
     let goToNiches = () => {
         navigate('/niches')
+    }
+
+    let goToUser = () => {
+        navigate('/user')
     }
 
     return <div id="auth_screen" className="screen normal_screen">
         <div id="container1">
             <div id="header">
                 <img onClick={goToNiches} src={refresh} />
-                <h1>Newzlash</h1>
-                <img onClick={requestLogOut} src={logout} />
+                <h1 onClick={()=>navigate('/about')}>Newzlash</h1>
+                <img onClick={goToUser} src={logout} />
             </div>
             <div id="news">
                 {niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)}
