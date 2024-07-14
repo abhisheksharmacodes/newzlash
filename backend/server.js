@@ -7,7 +7,7 @@ const port = 5000
 var client, db, collection
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({ origin: '*' }))
 
 async function connect() {
     try {
