@@ -22,7 +22,7 @@ async function connect() {
 
 connect()
 
-app.get("/",(res,req)=>{
+app.get("/",(req,res)=>{
     res.send('Working')
 })
 
