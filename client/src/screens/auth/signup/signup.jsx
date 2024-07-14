@@ -114,7 +114,7 @@ const Signup = () => {
         })
     }
 
-    return <div class="flex"><div id="auth_screen" className="screen">
+    return <div className="flex"><div id="auth_screen" className="screen">
         <div id="container">
             <span className="title">Sign up</span>
             <div className="flex container_sections">

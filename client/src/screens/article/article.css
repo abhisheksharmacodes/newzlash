@@ -26,6 +26,11 @@
     cursor: pointer;
 }
 
+#header img:nth-child(1) {
+    height:40px;
+    width: 40px;
+}
+
 #article {
     width: 100%;
     display: flex;
@@ -61,13 +66,12 @@
 }
 
 @media only screen and (max-width: 768px) {
-    #article h1 {
-        padding: 0 40px 0 40px;
+    #article h1, #article p {
+        padding: 0 10px 0 10px;
         font-size: 1.8rem;
     }
 
     #article p {
-        padding: 0 40px 0 40px;
         font-size: 1rem;
     }
 }

@@ -12,7 +12,8 @@ const Niches = () => {
 
     let navigate = useNavigate()
     const [selectedNiches, setSelectedNiches] = useState(storedNiches)
-    const [title,setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
+    const [title, setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
+    const [disabled, setDisabled] = useState(false)
 
     let checkStatus = () => {
         if (!Cookies.get('id'))
@@ -24,21 +25,18 @@ const Niches = () => {
     }, [])
 
     let checkNiches = () => {
-        axios.get('http://localhost:5000/niches/' + Cookies.get('id')).then((data) => {
-            console.log(data.data)
-            if (data.data.length != 0) {
-                setSelectedNiches(data.data)
-            }
-        })
+        if (!localStorage.getItem('niches')) {
+            axios.get('http://localhost:5000/niches/' + Cookies.get('id')).then((data) => {
+                if (data.data.length != 0) {
+                    setSelectedNiches(data.data)
+                }
+            })
+        }        
     }
 
     useEffect(() => {
         checkNiches()
     }, [])
-
-    useEffect(() => {
-        console.log(selectedNiches)
-    }, [selectedNiches])
 
     const handleClick = (niche) => {
         const newSelectedNiches = [...selectedNiches]
@@ -50,14 +48,18 @@ const Niches = () => {
         } else { // Niche not selected, add it
             newSelectedNiches.push(niche);
         }
+        localStorage.setItem('niches', newSelectedNiches)
         setSelectedNiches(newSelectedNiches)
+        if (newSelectedNiches.length >= 2)
+            setDisabled(false)
+        else
+            setDisabled(true)
     }
 
     const selectNiches = () => {
-        
-        localStorage.setItem('niches',selectedNiches)
-        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches)
-        navigate('/dashboard')
+        axios.put('http://localhost:5000/niches/' + Cookies.get('id'), selectedNiches).then(()=>{
+            navigate('/dashboard')
+        })
     }
 
     return <div id="auth_screen" className="screen normal_screen" style={{ padding: '50px' }}>
@@ -98,7 +100,8 @@ const Niches = () => {
             <div className={`niches ${selectedNiches.includes('Science') ? 'niches_selected' : ''}`}
                 onClick={() => handleClick('Science')}>Science</div>
         </div>
-        <button style={{ width: '140px' }} onClick={selectNiches}>Next</button>
+        <button disabled={disabled} style={{ width: '140px' }} onClick={selectNiches}>Next</button>
+        <span className="error_text" style={{ display: disabled ? 'block' : 'none', margin: '0', marginTop: '-30px' }}>Select atleast 2 niches</span>
     </div>
 }
 

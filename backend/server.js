@@ -55,9 +55,9 @@ app.put('/niches/:id', async (req, res) => {
     try {
         const updateResult = await collection.updateOne({ _id: new ObjectId(id) }, { $set: { niches: data } })
         if (updateResult.modifiedCount === 1) {
-            console.log("Data updated successfully!");
+            res.send(true)
         } else {
-            console.log("Document not found");
+            res.send(false)
         }
     } catch (err) {
         console.error(err)
@@ -74,11 +74,19 @@ app.post('/login', async (req, res) => {
         const cursor = collection.find(query)
         const results = await cursor.toArray()
 
-        if (password === results[0].password) {
-            res.send(results[0]._id.toString())
+        console.log(results.length?'email found':'not found')
+
+        if (results.length) {
+            if (password === results[0].password) {
+                res.send(results[0]._id.toString())
+            } 
+            else
+                res.send('pass')
+        } else {
+            res.send('email')
         }
-        else
-            res.send(false)
+
+        
     } catch (err) {
         console.error(err)
         res.status(500)

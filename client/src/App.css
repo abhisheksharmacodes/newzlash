@@ -24,6 +24,7 @@
   text-align: left;
   margin: 0;
   padding: 0;
+  transition: .4s;
 }
 
 *::selection {
@@ -85,6 +86,10 @@ button:hover {
 
 button:active {
   opacity: var(--opacity-normal-active);
+}
+
+button:disabled {
+  opacity: .6;
 }
 
 footer {

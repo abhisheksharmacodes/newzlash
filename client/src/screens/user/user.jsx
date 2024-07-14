@@ -24,6 +24,7 @@ const User = () => {
         Cookies.set('loggedIn', 'false', { expires: 7 });
         Cookies.set('email', '', { expires: 7 });
         Cookies.remove('id')
+        localStorage.removeItem('niches')
         navigate("/login")
     }
 
@@ -42,7 +43,7 @@ const User = () => {
                         {localStorage.getItem('niches').split(",").map((a)=><span>{a}</span>)}
                     </div>
                     <button onClick={()=>navigate('/niches')}>Customize niches</button>
-                    <button onClick={requestLogOut} class="secondary_button">Log out</button>
+                    <button onClick={requestLogOut} className="secondary_button">Log out</button>
                 </div>
             </div>
             <div id="l3" className="our_flex">

@@ -14,6 +14,8 @@ const Login = () => {
     let navigate = useNavigate()
 
     const [valid, setValid] = useState(false)
+    const [error, setError] = useState(false)
+    const [errorStatement,setErrorStatement] = useState('')
 
     const pass = useRef(null)
     const user_email = useRef(null)
@@ -33,17 +35,18 @@ const Login = () => {
             password: pass.current.value
         }
         axios.post('http://localhost:5000/login', user_data).then((data) => {
-            if (data.data) {
+            if (data.data == 'email') {
+                setError(true)
+                setErrorStatement('Email not found')
+            } else if (data.data == 'pass') {
+                setError(true)
+                setErrorStatement('Password mismatched')
+            } else {
                 Cookies.set('id', data.data, { expires: 7 })
                 Cookies.set('loggedIn', 'true', { expires: 7 });
                 Cookies.set('email', user_email.current.value, { expires: 7 });
                 navigate('/dashboard')
             }
-
-            else if (!data.data)
-                alert("Not logged in")
-            else
-                alert("Email not found")
         })
     }
 
@@ -64,6 +67,7 @@ const Login = () => {
                     </div>
                 </form>
                 <button onClick={requestLogin} disabled={!valid}>Log in</button>
+                <span className="error_text" style={{ display: error ? 'block' : 'none' }}>{errorStatement}</span>
             </div>
             <div className="hr"></div>
             <div className="container_sections flex">
