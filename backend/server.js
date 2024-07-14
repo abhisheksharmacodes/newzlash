@@ -118,3 +118,5 @@ app.get('/user/:id', async (req, res) => {
 app.listen(port, () => {
     console.log('Listening at port ' + port)
 })
+
+res.send('Working')
