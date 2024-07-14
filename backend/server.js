@@ -22,6 +22,9 @@ async function connect() {
 
 connect()
 
+app.get("/",(res,req)=>{
+    res.send('Working')
+})
 
 app.post('/adduser', async (req, res) => {
     const data = req.body
@@ -119,4 +122,3 @@ app.listen(port, () => {
     console.log('Listening at port ' + port)
 })
 
-res.send('Working')
