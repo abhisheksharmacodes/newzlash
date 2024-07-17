@@ -44,25 +44,24 @@ const Dashboard = () => {
         const url = `https://api.worldnewsapi.com/search-news?text=${selectTwoNiches(niches)}&language=en`;
         const apiKey = 'b7b5392106804c3e96895c7f650a8694';
 
-        // fetch(url, {
-        //     method: 'GET',
-        //     headers: {
-        //         'x-api-key': apiKey
-        //     }
-        // }).then(response => {
-        //     if (!response.ok) {
-        //         throw new Error(`HTTP error! Status: ${response.status}`);
-        //     }
-        //     return response.json();
-        // })
-        //     .then(data => {setNews(data.news)})
-        //     .catch(error => console.error('There was a problem with the fetch operation:', error));
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'x-api-key': apiKey
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+            .then(data => {setNews(data.news)})
+            .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
 
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
         <img src={props.image}/>
         <span>{props.title}</span>
-        {/* <p>{props.desc}</p> */}
     </div>
 
     useEffect(() => {

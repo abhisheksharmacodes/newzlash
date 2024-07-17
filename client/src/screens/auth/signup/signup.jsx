@@ -121,7 +121,7 @@ const Signup = () => {
             <div className="flex container_sections">
                 <form>
                     <div id="" className="flex">
-                        <input ref={fname} maxLength={20} placeholder="Name"></input>
+                        <input ref={fname} maxLength={35} placeholder="Name"></input>
                         <div className="normal_flex">
                             <input type="email" ref={user_email} onChange={emailValidate} placeholder="Email"></input>
                         </div>
