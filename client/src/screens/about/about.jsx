@@ -29,10 +29,6 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <footer>
-                <span>Privacy Policy</span>
-                <span>Terms & Conditions</span>
-            </footer>
 
         </div>
 
