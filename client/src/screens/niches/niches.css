@@ -4,7 +4,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap:40px;
+    gap: 40px;
     width: 100%;
 }
 
@@ -14,7 +14,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    gap:18px;
+    gap: 18px;
 }
 
 .niches {
@@ -30,5 +30,21 @@
 .niches_selected {
     background-color: rgba(255, 255, 255, .1);
     color: white;
-    box-shadow: inset 0px 0px 1px 2px rgba(255,255,255,.5);
+    box-shadow: inset 0px 0px 1px 2px rgba(255, 255, 255, .5);
+}
+
+.niches_screen {
+    padding: 50px;
+}
+
+@media only screen and (max-width: 420px) {
+    .niches_screen {
+        padding: 25px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .niches_screen {
+        margin-bottom: 80px;
+    }
 }

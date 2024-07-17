@@ -62,7 +62,7 @@ const Niches = () => {
         })
     }
 
-    return <div id="auth_screen" className="screen normal_screen" style={{ padding: '50px' }}>
+    return <div id="auth_screen" className="screen normal_screen niches_screen">
         <h1>{title}</h1>
         <div id="niches_container">
             <div className={`niches ${selectedNiches.includes('Technology') ? 'niches_selected' : ''}`}

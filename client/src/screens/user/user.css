@@ -34,7 +34,7 @@
 }
 
 #title span:nth-child(1) {
-    font-size: 56px;
+    font-size: 46px;
     font-weight: bolder;
     text-align: center;
 }
@@ -62,6 +62,22 @@
     margin-top: 30px;
 }
 
-@media only screen and (max-width: 768px) {
-    
+#back {
+    display: none;
+}
+
+
+@media screen and (max-width: 800px) {
+    #l1 img {
+        display: none;
+    }
+    #back {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #title span:nth-child(1) {
+        font-size: 40px;
+    }
 }
