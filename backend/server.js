@@ -99,6 +99,7 @@ app.post('/login', async (req, res) => {
 
         if (results.length) {
             if (password === results[0].password) {
+                results[0]._id = results[0]._id.toString()
                 res.send(results[0])
             }
             else

@@ -105,9 +105,10 @@ const Signup = () => {
             niches: []
         }
         axios.post('https://newzlash.vercel.app/adduser', user_data).then((data) => {
-            Cookies.set('id', data.data, { expires: 7 })
-            Cookies.set('loggedIn', 'true', { expires: 7 });
-            Cookies.set('email', user_email.current.value, { expires: 7 });
+            localStorage.setItem('id', data.data)
+            localStorage.setItem('loggedIn', 'true')
+            localStorage.setItem('email', user_email.current.value)
+            localStorage.setItem('name', fname.current.value)
             navigate("/niches")
         }).catch((e) => {
             alert(e)

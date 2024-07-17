@@ -15,8 +15,8 @@ const Article = () => {
     const [article, setArticle] = useState({})
 
     let checkStatus = () => {
-        // if (Cookies.get('loggedIn') == 'false')
-        //     navigate('/login')
+        if (localStorage.get('loggedIn') == 'false')
+            navigate('/login')
     }
 
     useEffect(()=>checkStatus(),[])
@@ -49,8 +49,8 @@ const Article = () => {
 
 
     let requestLogOut = () => {
-        Cookies.set('loggedIn', 'false', { expires: 7 });
-        Cookies.set('email', '', { expires: 7 });
+        localStorage.setItem('loggedIn', 'false');
+        localStorage.setItem('email', '');
         navigate("/login")
     }
 

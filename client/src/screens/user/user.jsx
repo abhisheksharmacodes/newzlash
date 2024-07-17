@@ -12,7 +12,7 @@ const User = () => {
     let navigate = useNavigate()
 
     let checkStatus = () => {
-        if (!Cookies.get('id'))
+        if (!localStorage.getItem('id'))
             navigate('/login')
     }
 
@@ -21,10 +21,10 @@ const User = () => {
     }, [])
 
     let requestLogOut = () => {
-        Cookies.set('loggedIn', 'false', { expires: 7 });
-        Cookies.set('email', '', { expires: 7 });
-        Cookies.remove('id')
-        localStorage.removeItem('niches')
+        localStorage.setItem('loggedIn', 'false', { expires: 7 });
+        localStorage.setItem('email', '', { expires: 7 });
+        localStorage.setItem('id','')
+        localStorage.setItem('niches','')
         navigate("/login")
     }
 

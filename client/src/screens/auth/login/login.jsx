@@ -42,9 +42,11 @@ const Login = () => {
                 setError(true)
                 setErrorStatement('Password mismatched')
             } else {
-                localStorage.set('id',data.data)
-                localStorage.set('loggedIn','true')
-                localStorage.set('email',user_email.current.value)
+                localStorage.setItem('id',data.data.toString())
+                localStorage.setItem('loggedIn','true')
+                localStorage.setItem('email',user_email.current.value)
+                localStorage.setItem('name',data.data.fname)
+                localStorage.setItem('niches',data.data.niches)
                 navigate('/dashboard')
             }
         })

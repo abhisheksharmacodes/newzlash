@@ -17,7 +17,7 @@ const Dashboard = () => {
     const [news, setNews] = useState([])
 
     let checkStatus = () => {
-        if (!Cookies.get('id'))
+        if (!localStorage.getItem('id'))
             navigate('/login')
     }
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     function getDataAndFetchNews() {
 
-        axios.get('https://newzlash.vercel.app/user/' + Cookies.get('id')).then((data) => {
+        axios.get('https://newzlash.vercel.app/user/' + localStorage.getItem('id')).then((data) => {
             setNiches(data.data)
             localStorage.setItem('niches',data.data)
         })

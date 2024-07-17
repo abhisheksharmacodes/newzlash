@@ -5,6 +5,6 @@ import Login from "./screens/auth/login/login";
 import Dashboard from "./screens/dashboard/dashboard";
 import Niches from './screens/niches/niches'
 
-const Home = () => <Niches></Niches> // Cookies.get('id') ? <Dashboard /> : <Login />
+const Home = () => localStorage.getItem('id') ? <Dashboard /> : <Login />
 
 export default Home;
