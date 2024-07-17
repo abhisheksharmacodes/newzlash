@@ -15,8 +15,8 @@ const Article = () => {
     const [article, setArticle] = useState({})
 
     let checkStatus = () => {
-        if (Cookies.get('loggedIn') == 'false')
-            navigate('/login')
+        // if (Cookies.get('loggedIn') == 'false')
+        //     navigate('/login')
     }
 
     useEffect(()=>checkStatus(),[])

@@ -104,7 +104,7 @@ const Signup = () => {
             password: pass.current.value,
             niches: []
         }
-        axios.post('https://newzlash.vercel.app/adduser', user_data).then((data) => {
+        axios.post('http://localhost:5000/adduser', user_data).then((data) => {
             Cookies.set('id', data.data, { expires: 7 })
             Cookies.set('loggedIn', 'true', { expires: 7 });
             Cookies.set('email', user_email.current.value, { expires: 7 });
@@ -114,7 +114,7 @@ const Signup = () => {
         })
     }
 
-    return <div className="flex"><div id="auth_screen" className="screen">
+    return <div className="flex"><div id="auth_screen" className="screen signup">
         <div id="container">
             <span className="title">Sign up</span>
             <div className="flex container_sections">
@@ -142,7 +142,7 @@ const Signup = () => {
             </div>
             <div className="hr"></div>
             <div className="container_sections flex">
-                <Link to="/login" className="link_text">Already have an account? Log in.</Link>
+                <Link to="/login" className="link_text">Already have an account?</Link>
             </div>
         </div> </div></div>
 }

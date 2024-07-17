@@ -34,7 +34,7 @@ const Login = () => {
             email: user_email.current.value,
             password: pass.current.value
         }
-        axios.post('https://newzlash.vercel.app/login', user_data).then((data) => {
+        axios.post('http://localhost:5000/login', user_data).then((data) => {
             if (data.data == 'email') {
                 setError(true)
                 setErrorStatement('Email not found')
@@ -56,7 +56,7 @@ const Login = () => {
     //     onSuccess: tokenResponse => alert(tokenResponse),
     // });
 
-    return <div className="flex"><div id="auth_screen" className="screen" style={{ flexDirection: 'column' }}>
+    return <div className="flex login"><div id="auth_screen" className="screen" style={{ flexDirection: 'column' }}>
         <div id="container">
             <span className="title">Log in</span>
             <div className="flex container_sections">
@@ -71,7 +71,7 @@ const Login = () => {
             </div>
             <div className="hr"></div>
             <div className="container_sections flex">
-                <Link to="/signup" className="link_text">Don't have an account? Create one.</Link>
+                <Link to="/signup" className="link_text">Don't have an account?</Link>
             </div>
         </div>
     </div>

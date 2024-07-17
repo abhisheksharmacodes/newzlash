@@ -46,3 +46,7 @@
 .password_status .green_status {
     background-color: var(--green);
 }
+
+.login input {
+    width: 220px;
+}

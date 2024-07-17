@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     function getDataAndFetchNews() {
 
-        axios.get('https://newzlash.vercel.app/user/' + Cookies.get('id')).then((data) => {
+        axios.get('http://localhost:5000/user/' + Cookies.get('id')).then((data) => {
             setNiches(data.data)
             localStorage.setItem('niches',data.data)
         })
