@@ -104,7 +104,7 @@ const Signup = () => {
             password: pass.current.value,
             niches: []
         }
-        axios.post('http://localhost:5000/adduser', user_data).then((data) => {
+        axios.post('https://newzlash.vercel.app/adduser', user_data).then((data) => {
             Cookies.set('id', data.data, { expires: 7 })
             Cookies.set('loggedIn', 'true', { expires: 7 });
             Cookies.set('email', user_email.current.value, { expires: 7 });
