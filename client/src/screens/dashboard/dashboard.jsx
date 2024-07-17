@@ -15,6 +15,7 @@ const Dashboard = () => {
     let navigate = useNavigate()
     const [niches, setNiches] = useState(storedNiches)
     const [news, setNews] = useState([])
+    const [loading,setLoading] = useState(true)
 
     let checkStatus = () => {
         if (!localStorage.getItem('id'))
@@ -44,19 +45,19 @@ const Dashboard = () => {
         const url = `https://api.worldnewsapi.com/search-news?text=${selectTwoNiches(niches)}&language=en`;
         const apiKey = 'b7b5392106804c3e96895c7f650a8694';
 
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'x-api-key': apiKey
-            }
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-            .then(data => {setNews(data.news)})
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
+        // fetch(url, {
+        //     method: 'GET',
+        //     headers: {
+        //         'x-api-key': apiKey
+        //     }
+        // }).then(response => {
+        //     if (!response.ok) {
+        //         throw new Error(`HTTP error! Status: ${response.status}`);
+        //     }
+        //     return response.json();
+        // })
+        //     .then(data => {setNews(data.news)})
+        //     .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
 
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>
@@ -78,6 +79,7 @@ const Dashboard = () => {
     }
 
     return <div id="auth_screen" className="screen normal_screen">
+        
         <div id="container1">
             <div id="header">
                 <img onClick={goToNiches} style={{transform:'scale(.87)'}} src={refresh} />
@@ -85,7 +87,12 @@ const Dashboard = () => {
                 <img onClick={goToUser} src={logout} />
             </div>
             <div id="news">
-                {niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)}
+                {
+                    loading ? 
+                    <div id="loading"></div>
+                    :
+                    niches.length > 0 && news.map((a) => <NewsCard open={()=>{Cookies.set('newsArticle',a.id);navigate('/article')}} image={a.image} title={a.title} desc={a.summary} />)
+                }
             </div>
         </div>
     </div>

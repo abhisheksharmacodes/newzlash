@@ -21,17 +21,14 @@ const User = () => {
     }, [])
 
     let requestLogOut = () => {
-        localStorage.setItem('loggedIn', 'false', { expires: 7 });
-        localStorage.setItem('email', '', { expires: 7 });
-        localStorage.setItem('id','')
-        localStorage.setItem('niches','')
+        localStorage.clear()
         navigate("/login")
     }
 
     return <div id="auth_screen" className="">
         <div id="container1" className="our_flex">
             <div id="l1" className="our_flex">
-                <img src={cross} onClick={()=>navigate('/dashboard')} alt="" />
+                <img src={cross} onClick={() => navigate('/dashboard')} alt="" />
             </div>
             <div id="l2" className="our_flex">
                 <div id="title" className="our_flex">
@@ -40,11 +37,11 @@ const User = () => {
                 </div>
                 <div id="niches_container" className="our_flex" style={{ flexDirection: 'column' }}>
                     <div id="niches" className="our_flex">
-                        {localStorage.getItem('niches').split(",").map((a)=><span>{a}</span>)}
+                        {localStorage.getItem('niches').split(",").map((a) => <span>{a}</span>)}
                     </div>
-                    <button onClick={()=>navigate('/niches')}>Customize niches</button>
+                    <button onClick={() => navigate('/niches')}>Customize niches</button>
                     <button onClick={requestLogOut} className="secondary_button">Log out</button>
-                    <button onClick={()=>navigate('/'+localStorage.getItem('stack'))} id="back" className="secondary_button">Back</button>
+                    <button onClick={() => navigate('/' + localStorage.getItem('stack'))} id="back" className="secondary_button">Back</button>
                 </div>
             </div>
             <div id="l3" className="our_flex">
