@@ -15,7 +15,7 @@ const Article = () => {
     const [article, setArticle] = useState({})
 
     let checkStatus = () => {
-        if (localStorage.get('loggedIn') == 'false')
+        if (localStorage.getItem('loggedIn') == 'false')
             navigate('/login')
     }
 
