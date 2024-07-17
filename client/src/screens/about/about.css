@@ -72,6 +72,12 @@
 }
 
 @media screen and (max-width: 800px) { 
+    #l1 img {
+        display: none;
+    }
+    #back {
+        display: block;
+    }
     #about_info {
         width: 100%;
     }
