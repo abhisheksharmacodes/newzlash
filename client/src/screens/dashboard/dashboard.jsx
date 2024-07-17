@@ -74,6 +74,7 @@ const Dashboard = () => {
 
     let goToUser = () => {
         navigate('/user')
+        localStorage.setItem('stack','dashboard')
     }
 
     return <div id="auth_screen" className="screen normal_screen">

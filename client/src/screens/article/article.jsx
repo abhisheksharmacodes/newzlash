@@ -70,7 +70,7 @@ const Article = () => {
             <div id="header">
                 <img onClick={goback} src={back} />
                 <h1>Newzlash</h1>
-                <img onClick={requestLogOut} src={logout} />
+                <img onClick={()=>{navigate('/user');localStorage.setItem('stack','article')}} src={logout} />
             </div>
             <div id="article">
                 <img src={article.image} alt="" />

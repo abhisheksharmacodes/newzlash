@@ -44,7 +44,7 @@ const User = () => {
                     </div>
                     <button onClick={()=>navigate('/niches')}>Customize niches</button>
                     <button onClick={requestLogOut} className="secondary_button">Log out</button>
-                    <button onClick={()=>navigate('/dashboard')} id="back" className="secondary_button">Back</button>
+                    <button onClick={()=>navigate('/'+localStorage.getItem('stack'))} id="back" className="secondary_button">Back</button>
                 </div>
             </div>
             <div id="l3" className="our_flex">
