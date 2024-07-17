@@ -80,7 +80,7 @@ const Dashboard = () => {
     return <div id="auth_screen" className="screen normal_screen">
         <div id="container1">
             <div id="header">
-                <img onClick={goToNiches} src={refresh} />
+                <img onClick={goToNiches} style={{transform:'scale(.87)'}} src={refresh} />
                 <h1 onClick={()=>navigate('/about')}>Newzlash</h1>
                 <img onClick={goToUser} src={logout} />
             </div>

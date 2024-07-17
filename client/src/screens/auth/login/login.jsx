@@ -42,9 +42,9 @@ const Login = () => {
                 setError(true)
                 setErrorStatement('Password mismatched')
             } else {
-                Cookies.set('id', data.data, { expires: 7 })
-                Cookies.set('loggedIn', 'true', { expires: 7 });
-                Cookies.set('email', user_email.current.value, { expires: 7 });
+                localStorage.set('id',data.data)
+                localStorage.set('loggedIn','true')
+                localStorage.set('email',user_email.current.value)
                 navigate('/dashboard')
             }
         })
