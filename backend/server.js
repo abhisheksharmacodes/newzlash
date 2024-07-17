@@ -27,8 +27,13 @@ async function connect() {
 
 connect()
 
+<<<<<<< HEAD
 app.get('/',(req,res)=>{
     res.send('working')
+=======
+app.get("/",(req,res)=>{
+    res.send('Working')
+>>>>>>> a9de892ed7aad759c3152376031ee73349085de8
 })
 
 app.post('/adduser', async (req, res) => {
@@ -132,3 +137,4 @@ app.get('/user/:id', async (req, res) => {
 app.listen(port, () => {
     console.log('Listening at port ' + port)
 })
+
