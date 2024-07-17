@@ -42,7 +42,7 @@ const Login = () => {
                 setError(true)
                 setErrorStatement('Password mismatched')
             } else {
-                localStorage.setItem('id',data.data.toString())
+                localStorage.setItem('id',data.data._id)
                 localStorage.setItem('loggedIn','true')
                 localStorage.setItem('email',user_email.current.value)
                 localStorage.setItem('name',data.data.fname)

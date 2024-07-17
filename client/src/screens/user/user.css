@@ -37,6 +37,7 @@
     font-size: 46px;
     font-weight: bolder;
     text-align: center;
+    text-transform: capitalize;
 }
 
 #likes {

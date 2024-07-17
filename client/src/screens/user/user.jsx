@@ -35,7 +35,7 @@ const User = () => {
             </div>
             <div id="l2" className="our_flex">
                 <div id="title" className="our_flex">
-                    <span>Abhishek Sharma</span>
+                    <span>{localStorage.getItem('name')}</span>
                     <span id="likes">likes</span>
                 </div>
                 <div id="niches_container" className="our_flex" style={{ flexDirection: 'column' }}>
