@@ -69,7 +69,7 @@ const Article = () => {
     return <div id="auth_screen" className="">
         <div id="container1">
             <div id="header">
-                <img onClick={goback} src={back} />
+                <img onClick={goback} src={back} tyle={{transform:'scale(.8)'}} />
                 <h1>Newzlash</h1>
                 <img onClick={() => { navigate('/user'); localStorage.setItem('stack', 'article') }} src={logout} />
             </div>
