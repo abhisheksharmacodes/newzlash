@@ -15,7 +15,7 @@ const Dashboard = () => {
     let navigate = useNavigate()
     const [niches, setNiches] = useState(storedNiches)
     const [news, setNews] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
 
     let checkStatus = () => {
         if (!localStorage.getItem('id'))
@@ -56,7 +56,7 @@ const Dashboard = () => {
             }
             return response.json();
         })
-            .then(data => {setNews(data.news)})
+            .then(data => {setNews(data.news);setLoading(false)})
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
 
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
     return <div id="auth_screen" className="screen normal_screen" style={{height:'100%'}}>
         
-        <div id="container1">
+        <div id="container1" style={{width:'100%',marginLeft:'0'}}>
             <div id="header">
                 <img onClick={goToNiches} style={{transform:'scale(.87)'}} src={refresh} />
                 <h1 onClick={()=>navigate('/about')}>Newzlash</h1>
