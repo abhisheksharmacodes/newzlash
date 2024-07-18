@@ -104,7 +104,7 @@ const Signup = () => {
             password: pass.current.value,
             niches: []
         }
-        axios.post('https://newzlash.vercel.app/adduser', user_data).then((data) => {
+        axios.post('https://newzlash-api.vercel.app/adduser', user_data).then((data) => {
             localStorage.setItem('id', data.data)
             localStorage.setItem('loggedIn', 'true')
             localStorage.setItem('email', user_email.current.value)

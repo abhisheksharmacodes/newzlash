@@ -34,7 +34,7 @@ const Login = () => {
             email: user_email.current.value,
             password: pass.current.value
         }
-        axios.post('https://newzlash.vercel.app/login', user_data).then((data) => {
+        axios.post('https://newzlash-api.vercel.app/login', user_data).then((data) => {
             if (data.data == 'email') {
                 setError(true)
                 setErrorStatement('Email not found')

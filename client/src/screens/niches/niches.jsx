@@ -26,7 +26,7 @@ const Niches = () => {
 
     let checkNiches = () => {
         if (!localStorage.getItem('niches')) {
-            axios.get('https://newzlash.vercel.app/niches/' + localStorage.getItem('id')).then((data) => {
+            axios.get('https://newzlash-api.vercel.app/niches/' + localStorage.getItem('id')).then((data) => {
                 if (data.data.length != 0) {
                     setSelectedNiches(data.data)
                 }
@@ -57,7 +57,7 @@ const Niches = () => {
     }
 
     const selectNiches = () => {
-        axios.put('https://newzlash.vercel.app/niches/' + localStorage.getItem('id'), selectedNiches).then(()=>{
+        axios.put('https://newzlash-api.vercel.app/niches/' + localStorage.getItem('id'), selectedNiches).then(()=>{
             navigate('/dashboard')
         })
     }
