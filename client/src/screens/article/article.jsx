@@ -13,13 +13,14 @@ const Article = () => {
     let navigate = useNavigate()
 
     const [article, setArticle] = useState({})
+    const [loading,setLoading] = useState(true)
 
     let checkStatus = () => {
         if (localStorage.getItem('loggedIn') == 'false')
             navigate('/login')
     }
 
-    useEffect(()=>checkStatus(),[])
+    useEffect(() => checkStatus(), [])
 
     let clean = (a) => a.replaceAll("<(.|\n)*?>", "").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&")
 
@@ -39,7 +40,7 @@ const Article = () => {
             }
             return response.json();
         })
-            .then(data => {setArticle(data.news[0])})
+            .then(data => { setArticle(data.news[0]);setLoading(false) })
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     }
 
@@ -70,13 +71,18 @@ const Article = () => {
             <div id="header">
                 <img onClick={goback} src={back} />
                 <h1>Newzlash</h1>
-                <img onClick={()=>{navigate('/user');localStorage.setItem('stack','article')}} src={logout} />
+                <img onClick={() => { navigate('/user'); localStorage.setItem('stack', 'article') }} src={logout} />
             </div>
             <div id="article">
-                <img src={article.image} alt="" />
-                <h1>{article.title}</h1>
-                <p>{article.text}</p>
-                <p>by <span id="able">{article.author}</span></p>
+                {
+                    loading ?
+                        <div id="loading"></div>
+                        : <><img src={article.image} alt="" />
+                            <h1>{article.title}</h1>
+                            <p>{article.text}</p>
+                            <p>by <span id="able">{article.author}</span></p></>
+                }
+
             </div>
         </div>
 
