@@ -13,7 +13,7 @@ const Niches = () => {
     let navigate = useNavigate()
     const [selectedNiches, setSelectedNiches] = useState(storedNiches)
     const [title, setTitle] = useState(storedNiches.length ? 'Customize niches' : 'Select niches')
-    const [disabled, setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState(true)
 
     let checkStatus = () => {
         if (!localStorage.getItem('id'))
