@@ -86,7 +86,7 @@ const Article = () => {
 
     const ExpiredMesaage = <p>Your session has expired. Please login again via <a href="https://www.google.com/" target="_blank"> Google</a>.</p>
 
-    return <div id="auth_screen" className="">
+    return <div id="auth_screen" className="article">
         <div id="container1">
             <div id="header">
                 <img onClick={goback} src={back} tyle={{ transform: 'scale(.8)' }} />
