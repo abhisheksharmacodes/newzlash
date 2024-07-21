@@ -13,7 +13,7 @@ const Article = () => {
     let navigate = useNavigate()
 
     const [article, setArticle] = useState({})
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     let checkStatus = () => {
         if (localStorage.getItem('loggedIn') == 'false')
