@@ -57,7 +57,7 @@ const Dashboard = () => {
             return response.json();
         })
             .then(data => {setNews(data.news);setLoading(false)})
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
+            .catch(error => null);
     }
 
     let NewsCard = (props) => <div className="newsCard" onClick={props.open}>

@@ -54,10 +54,15 @@
     font-size: 2.5rem;
 }
 
-#article p {
+#article p, #article span {
     padding: 0 120px 0 120px;
     font-size: 1.2rem;
     text-align: justify;
+}
+
+#article span {
+    opacity:.6;
+    align-self:flex-start;
 }
 
 #courtesy {
@@ -65,13 +70,25 @@
     cursor: pointer;
 }
 
+#info {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
+
+#info span {
+    align-self: initial;
+    text-align: left;
+}
+
 @media only screen and (max-width: 768px) {
-    #article h1, #article p {
+    #article h1, #article p, #article span {
         padding: 0 10px 0 10px;
         font-size: 1.8rem;
     }
 
-    #article p {
+    #article p, #article span {
         font-size: 1rem;
     }
+
 }
