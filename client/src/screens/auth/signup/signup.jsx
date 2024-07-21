@@ -16,6 +16,7 @@ const Signup = () => {
     const email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const [valid, setValid] = useState(false)
+    const [error,setError] = useState(false)
 
     const fname = useRef(null)
     const pass = useRef(null)
@@ -111,7 +112,7 @@ const Signup = () => {
             localStorage.setItem('name', fname.current.value)
             navigate("/niches")
         }).catch((e) => {
-            alert(e)
+            setError(true)
         })
     }
 
@@ -140,6 +141,7 @@ const Signup = () => {
                     </div>
                 </form>
                 <button disabled={!valid} onClick={addUser}>Sign up</button>
+                <span className="error_text" style={{ display: error ? 'block' : 'none' }}>Something went wrong</span>
             </div>
             <div className="hr"></div>
             <div className="container_sections flex">
