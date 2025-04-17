@@ -13,10 +13,7 @@ let cachedClient = null;
 async function connect() {
     if (cachedClient) return cachedClient;    
     try {
-        cachedClient = await MongoClient.connect('mongodb+srv://geekysharma31:05kWuH8ZXS41EoUt@cluster0.v4c6jlc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        cachedClient = await MongoClient.connect('mongodb+srv://geekysharma31:05kWuH8ZXS41EoUt@cluster0.v4c6jlc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
         console.log("Connected to MongoDB");
         return cachedClient;
     } catch (e) {
