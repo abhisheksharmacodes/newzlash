@@ -11,9 +11,9 @@ app.use(cors())
 let cachedClient = null;
 
 async function connect() {
-    if (cachedClient) return cachedClient;
+    if (cachedClient) return cachedClient;    
     try {
-        cachedClient = await MongoClient.connect('mongodb+srv://root:root@tasks.jrjhcnd.mongodb.net/?retryWrites=true&w=majority&appName=tasks', {
+        cachedClient = await MongoClient.connect("mongodb+srv://geekysharma31:05kWuH8ZXS41EoUt@cluster0.yhxajaq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
